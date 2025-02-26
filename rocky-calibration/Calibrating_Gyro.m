@@ -277,9 +277,10 @@ function Calibrating_Gyro()
     % period
     peak_diffs = zeros(1, length(peaks)-1);
     for i = 1:length(peaks)-1
-        peak_diffs = peaks(i+1) - peaks(i)
+        peak_diffs = peaks(i+1) - peaks(i);
     end
     
-    % natural frequency is 2*pi*period
-    nat_frequency = 2*pi*mean(peak_diffs)
+    % natural frequency is 1/period
+    nat_frequency = 1/mean(peak_diffs)
+
 end
