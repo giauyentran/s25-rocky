@@ -281,6 +281,18 @@ function Calibrating_Gyro()
     end
     
     % natural frequency is 1/period
-    nat_frequency = 1/mean(peak_diffs)
+    f = 1/mean(peak_diffs)
+
+    angular_frequency = 2*pi*f
+
+    g = 9.81; % acceleration due to gravity (m/s^2)
+    l_eff = g / (angular_frequency^2);
+    fprintf('Effective length (l_eff) = %.4f m\n', l_eff);
+
+    zeta = 0.7;
+
+    p1 = -zeta * angular_frequency + 1i * angular_frequency * sqrt(1 - zeta^2);
+    p2 = -zeta * angular_frequency - 1i * angular_frequency * sqrt(1 - zeta^2);
+    fprintf('Desired pole locations: %.4f + %.4fj, %.4f - %.4fj\n', real(p1), imag(p1), real(p2), imag(p2));
 
 end
